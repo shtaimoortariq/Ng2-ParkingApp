@@ -1,0 +1,40 @@
+<md-toolbar color="primary"> Parking System </md-toolbar>
+<md-toolbar color="primary"> Signup </md-toolbar>
+
+<md-list>
+  <form [formGroup]="signupForm" (ngSubmit)="signupUser()" novalidate>
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="Enter Name" type="text" formControlName="name" />
+      </md-input-container>
+    </md-list-item>
+
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="Enter Email" type="email" formControlName="userName" />
+      </md-input-container>
+    </md-list-item>
+
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="Enter Password" type="password" formControlName="password" />
+      </md-input-container>
+    </md-list-item>
+    
+
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="Enter Contact No" type="text" formControlName="contactNo" />
+      </md-input-container>
+    </md-list-item>
+
+    <button md-raised-button color="primary" [disabled]="signupForm.status=='INVALID'">Signup</button>
+    <p>already have account <a routerLink="/login" routerLinkActive="active">Login</a> </p>
+
+
+  </form>
+</md-list>
+
+<button md-raised-button color="primary" (click)="signout()">signout</button>
+
+<button md-raised-button color="primary" (click)="getData()">getData</button>

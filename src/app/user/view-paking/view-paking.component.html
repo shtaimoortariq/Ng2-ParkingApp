@@ -1,0 +1,5 @@
+<div *ngFor="let place of allPlaces; let i = index">
+  <md-card>
+    <button md-raised-button color="primary" (click)="setParkingPlace(place)">{{place}}</button>
+  </md-card>
+</div>

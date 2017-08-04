@@ -1,0 +1,42 @@
+<!-- <md-input-container class="example-full-width">
+  <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+</md-input-container>
+<md-datepicker #picker></md-datepicker>
+<button md-raised-button (click)="picker.open()">Open</button> -->
+
+
+
+<md-input-container>
+  <input mdInput [mdDatepicker]="date" #myInput [min]="minDate" placeholder="Choose a date" [(ngModel)]="selectedDate">
+  <button mdSuffix [mdDatepickerToggle]="date"></button>
+</md-input-container>
+<md-datepicker #date></md-datepicker>
+
+
+<md-select placeholder="Select Time" [(ngModel)]="selectedTime">
+  <md-option *ngFor="let t of time" [value]="t">
+    {{ t }}
+  </md-option>
+</md-select>
+
+<md-select placeholder="Select Duration" [(ngModel)]="selectedDuration">
+  <md-option *ngFor="let d of duration" [value]="d">
+    {{ d }}
+  </md-option>
+</md-select>
+
+<p>{{selectedDate}}</p>
+<p>{{selectedTime}}</p>
+<p>{{selectedDuration}}</p>
+
+<button md-raised-button (click)="showSlots()">Show Slots</button>
+
+<div *ngIf="showSlotsFlag">
+  <h2>Not Reserved Slots</h2>
+  <button md-raised-button *ngFor="let button of slots; let i = index" (click)="selectSlotForNewReservation(i)">{{button}}</button>
+  <h2>Reserved Slots</h2>
+  <button md-raised-button style="background-color:yellow" *ngFor="let button of usedSlots; let i = index">{{button}}</button>
+
+</div>
+<br><br><br>
+<button md-raised-button>Reserve Slot</button>
