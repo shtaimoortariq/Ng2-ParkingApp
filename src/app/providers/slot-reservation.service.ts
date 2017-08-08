@@ -10,18 +10,25 @@ export class SlotReservationService {
     booking: FirebaseListObservable<any>;
     newBooking: FirebaseListObservable<any>;
     allCurrentUserBooking: FirebaseListObservable<any>;
+    viewCompleteUserBooking: FirebaseListObservable<any>;
     uid;
     reservedSlots = [];
     blockSlots = [];
     userAllBooking = [];
     userAllBookingKey = [];
-
+    currentUserAllBooking = [];
+    currentUserAllBookingKey = [];
+    adminCancelBookingUid;
 
     constructor(private usersAuthService: UsersAuthService,
         private db: AngularFireDatabase) {
 
         console.log("SlotReservationService");
-        this.uid = usersAuthService.uid;
+        //this.uid = usersAuthService.uid;
+
+        usersAuthService.getCurrentUserId().subscribe((uid) => {
+            this.uid = uid;
+        })
     }
 
 
@@ -80,8 +87,8 @@ export class SlotReservationService {
             console.log(this.reservedSlots[i].reserveDate)
             if (this.reservedSlots[i].reserveDate == currentDate) {
                 console.log("Date is mateched with selecected date");
-                if ((currentEndTime >= this.reservedSlots[i].startTime && currentStartTime < this.reservedSlots[i].endTime)
-                    || (currentEndTime <= this.reservedSlots[i].endTime && currentEndTime > this.reservedSlots[i].startTime)) {
+                if (((currentEndTime >= this.reservedSlots[i].startTime) && (currentStartTime < this.reservedSlots[i].endTime))
+                    || ((currentEndTime <= this.reservedSlots[i].endTime) && (currentEndTime > this.reservedSlots[i].startTime))) {
                     console.log("This slot is not avalible " + this.reservedSlots[i].slotNo);
                     this.blockSlots.push(this.reservedSlots[i].slotNo);
 
@@ -169,10 +176,52 @@ export class SlotReservationService {
 
     }
 
+    viewCompleteUserReservation(specificUid) {
+        this.viewCompleteUserBooking = this.db.list('booking/' + specificUid, { preserveSnapshot: true })
+        console.log("ViewCompleteUserReservation");
+
+        return this.viewCompleteUserBooking.map(uid => {
+            console.log("subscribe from viewComplete");
+            this.currentUserAllBooking = [];
+            this.currentUserAllBookingKey = [];
+
+            uid.forEach(places => {
+                console.log(places.key)
+                console.log(places.val())
+                places.forEach(slotData => {
+                    console.log(slotData.key);
+                    console.log(slotData.val());
+                    this.currentUserAllBookingKey.push(slotData.key);
+                    this.currentUserAllBooking.push(slotData.val());
+                });
+            });
+            return this.currentUserAllBooking;
+
+        });
+    }
+
+
+    currentUserBooking() {
+        return this.currentUserAllBooking;
+    }
+
+    get currentUserBookingKey(): any {
+        return this.currentUserAllBookingKey;
+    }
+
 
     get getAllUsersKey(): any {
         return this.userAllBookingKey;
     }
+
+    // setCancelBookingUser(bookingUid) {
+
+
+    //     this.adminCancelBookingUid = bookingUid;
+    //     console.log(this.adminCancelBookingUid);
+    //     console.log(bookingUid);
+
+    // }
 
     // getUserAllBooking(): Observable<any> {
     //     return this.allCurrentUserBooking.map((data) => {

@@ -48,7 +48,7 @@ export class BookParkingComponent implements OnInit {
   showSlots() {
 
     this.showSlotsFlag = true;
-    let tempUsedSlots;
+    let tempUsedSlots = [];
     let alreadyReserved = [];
     this.slots = ['slot 1', 'slot 2', 'slot 3', 'slot 4', 'slot 5', 'slot 6', 'slot 7', 'slot 8', 'slot 9', 'slot 10'];    // slots
     this.usedSlots = [];

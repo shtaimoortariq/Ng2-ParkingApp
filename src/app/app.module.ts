@@ -9,10 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdToolbarModule, MdListModule,
    MdCardModule, MdDatepickerModule, MdNativeDateModule, MdSelectModule } from '@angular/material';
+
+import { FlexLayoutModule } from "@angular/flex-layout";
 import 'hammerjs';
 
 
-//Components
+//User Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -22,6 +24,12 @@ import { BookParkingComponent } from './user/book-parking/book-parking.component
 import { ViewBookingComponent } from './user/view-booking/view-booking.component';
 import { FeedbackComponent } from './user/feedback/feedback.component';
 
+//Admin Components
+import { AdminComponent } from './admin/admin.component';
+import { ViewUsersComponent } from './admin/view-users/view-users.component';
+import { ViewFeedBackComponent } from './admin/view-feed-back/view-feed-back.component';
+import { ViewAllBookingsComponent } from './admin/view-all-bookings/view-all-bookings.component';
+
 
 //Routing
 import { AppRoutingModule } from './app.routes';
@@ -30,6 +38,7 @@ import { AppRoutingModule } from './app.routes';
 //Providers
 import { UsersAuthService } from "./providers/users-auth.service";
 import { SlotReservationService } from "./providers/slot-reservation.service";
+import { ChatService } from "./providers/chat.service";
 
 //Auth Guards
 import { UserAuthGuardGuard } from "./providers/user-auth-guard.guard";
@@ -40,10 +49,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { AdminComponent } from './admin/admin.component';
-import { ViewUsersComponent } from './admin/view-users/view-users.component';
-import { ViewFeedBackComponent } from './admin/view-feed-back/view-feed-back.component';
-import { ViewAllBookingsComponent } from './admin/view-all-bookings/view-all-bookings.component';
+
 
 
 
@@ -82,6 +88,7 @@ import { ViewAllBookingsComponent } from './admin/view-all-bookings/view-all-boo
     MdDatepickerModule,
     MdNativeDateModule,
     MdSelectModule,
+    FlexLayoutModule,
 
     //Routes
     AppRoutingModule,
@@ -91,7 +98,7 @@ import { ViewAllBookingsComponent } from './admin/view-all-bookings/view-all-boo
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
-  providers: [UsersAuthService, UserAuthGuardGuard, AdminAuthGuardGuard, SlotReservationService],
+  providers: [UsersAuthService, UserAuthGuardGuard, AdminAuthGuardGuard, SlotReservationService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

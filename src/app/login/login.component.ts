@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['admin@gmail.com', Validators.required],
+      email: ['admin@admin.com', Validators.required],
       password: ['123123', Validators.required]
     })
 
@@ -45,11 +45,15 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     this.userAuthService.signInFirebaseUser(this.loginForm.value).then((login) => {
-      this.router.navigate(['user/viewParking'])
-        .then(data => console.log("Routing Done"))
-        .catch((data) => console.log("error"));
-
-    });
+      this.userAuthService.getUserProfile().subscribe((profile) => {
+        if(profile.type == 'admin') {
+          this.router.navigate(['admin/viewAllBookings'])
+        }
+        else {
+          this.router.navigate(['user/viewParking'])
+        }
+      })
+    })
 
   }
 

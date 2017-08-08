@@ -1,4 +1,7 @@
-<p>
-  admin works!
-</p>
+<md-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center"> Admin Parking System </md-toolbar>
+<md-toolbar color="primary">
+  <button md-raised-button color="primary" routerLink='viewUsers' routerLinkActive="changeColor">viewAllUsers</button>
+  <button md-raised-button color="primary" routerLink='viewFeedBack' routerLinkActive="changeColor">feedBack</button>
+  <button md-raised-button color="warn" (click)="logout()">logout</button>
+</md-toolbar>
 <router-outlet></router-outlet>

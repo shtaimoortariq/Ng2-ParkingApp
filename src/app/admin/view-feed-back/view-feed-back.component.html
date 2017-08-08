@@ -1,3 +1,64 @@
-<p>
-  view-feed-back works!
-</p>
+<br><br><br>
+
+<div fxLayout="row">
+  <div fxFlex="25">
+    <md-card>
+      <md-card-title>All users</md-card-title>
+      <div *ngFor="let user of allUsers; let i = index">
+        <button md-raised-button (click)="viewChat(i)">{{user.name}}</button>
+      </div>
+
+    </md-card>
+
+  </div>
+
+
+  <div fxLayout="column" fxFlex="50">
+    <md-card>
+      <md-card-title>User Chat</md-card-title>
+
+
+      <div *ngFor="let item of currentUserChat | async">
+        <div *ngIf="item.name=='admin'">
+          
+            <p class="admin">{{ item.name }} : {{ item.userMessage }} </p>
+          
+        </div>
+        <div *ngIf="item.name!='admin'">
+          <div>
+            <span>{{ item.name }} : </span>
+            <span class="user"> {{ item.userMessage }}</span>
+          </div>
+        </div>
+      </div>
+
+    </md-card>
+
+    <md-card>
+      <md-card-title>Send Message</md-card-title>
+
+      <form [formGroup]="adminChat">
+
+        <md-input-container>
+          <input mdInput placeholder="New Message" type="text" formControlName="chatMessage" />
+        </md-input-container>
+        <button md-raised-button color="primary" [disabled]="adminChat.status == 'INVALID'" (click)="reply()">Send</button>
+      </form>
+    </md-card>
+
+  </div>
+
+  <div fxFlex>
+    <md-card>
+      <md-card-title>User Detail</md-card-title>
+      <p *ngIf="currentUserFlag">
+        <md-list-item>
+          Name: {{currentUser.name}}
+        </md-list-item>
+        <md-list-item>
+          Email: {{currentUser.userName}}
+        </md-list-item>
+      </p>
+    </md-card>
+  </div>
+</div>

@@ -40,9 +40,7 @@ export class ViewBookingComponent implements OnInit {
   cancel(booking, index) {
     console.log(this.userAllBookingKey);
     console.log('booking/' + this.uid + '/' + booking.place + '/' + this.userAllBookingKey[index]);
-
     this.db.list('booking/' + this.uid + '/' + booking.place + '/').remove(this.userAllBookingKey[index]);
-
 
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersAuthService } from "../providers/users-auth.service";
 
 
 @Component({
@@ -8,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() {
+  constructor(private usersAuthService: UsersAuthService) {
 
     
    }
 
   ngOnInit() {
 
+  }
+
+
+    logout() {
+      this.usersAuthService.logoutFirebaseUser();
   }
 
 }

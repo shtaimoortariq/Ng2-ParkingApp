@@ -1,3 +1,20 @@
-<p>
-  view-users works!
-</p>
+<md-card>
+  <md-list>
+    <md-card-title>App All Users</md-card-title>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>View Bookings</th>
+        <th>Delete User</th>
+      </tr>
+
+      <tr *ngFor="let user of allUsers; let i = index">
+        <th>{{user.name}}</th>
+        <th>{{user.userName}}</th>
+        <th><button md-raised-button color="warn" (click)="viewUserBookings(i)">show booking</button></th>
+        <th><button md-raised-button color="primary" (click)="deleteUser(i)">delete user</button></th>
+      </tr>
+    </table>
+  </md-list>
+</md-card>

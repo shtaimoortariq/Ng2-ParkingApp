@@ -39,7 +39,7 @@ const routes: Routes = [
 
     {
         path: 'admin', canActivate: [AdminAuthGuardGuard], component: AdminComponent, children: [
-            { path: 'viewBooking', component: ViewAllBookingsComponent },
+            { path: 'viewAllBookings/:uid', component: ViewAllBookingsComponent },
             { path: 'viewUsers', component:ViewUsersComponent },
             { path: 'viewFeedBack', component: ViewFeedBackComponent },
 

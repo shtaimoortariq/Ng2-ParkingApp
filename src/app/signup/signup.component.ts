@@ -32,9 +32,6 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  signout() {
-      this.usersAuthService.logoutFirebaseUser();    
-  }
 
   signupUser() {
 
@@ -43,10 +40,6 @@ export class SignupComponent implements OnInit {
       this.usersAuthService.getCurrentUserId().subscribe((data)=>console.log(data));
     });
     
-  }
-
-  getData() {
-    this.usersAuthService.getCurrentUserId().subscribe((data)=>console.log(data));
   }
 
 }

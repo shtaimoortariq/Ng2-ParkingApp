@@ -1,3 +1,18 @@
-<p>
-  feedback works!
-</p>
+<ul>
+  <li *ngFor="let item of showChat | async">
+    {{ item.name }} 
+    {{item.userMessage}}
+  </li>
+</ul>
+
+
+
+<form [formGroup]="chatForm">
+  <md-input-container>
+    <input mdInput placeholder="New Message" type="text" formControlName="message" />
+  </md-input-container>
+
+  <button md-raised-button color="primary" (click)="send()" [disabled]="chatForm.status == 'INVALID'">Send</button>
+</form>
+
+

@@ -13,10 +13,14 @@ export class UsersAuthService {
 
 
   userRegistration: FirebaseObjectObservable<any>;
+  allUsers: FirebaseListObservable<any>;
+  allUsersKey = [];
+  allUsersVal = [];
   //userProfile: FirebaseObjectObservable<any>;
   authState;
   userProfile;
   userType;
+
 
 
   constructor(public db: AngularFireDatabase,
@@ -32,12 +36,12 @@ export class UsersAuthService {
   }
 
   signInFirebaseUser(loginForm) {
-      return this.afAuth.auth.signInWithEmailAndPassword(loginForm.email, loginForm.password)
-      .then((data)=>console.log(data))
-      .catch((error)=> console.log(error)); 
+    return this.afAuth.auth.signInWithEmailAndPassword(loginForm.email, loginForm.password)
+      .then((data) => {console.log(data);this.getUserProfile()})
+      .catch((error) => console.log(error));
   }
-  
-  
+
+
   createFirebaseUser(signupForm): firebase.Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(signupForm.userName, signupForm.password)
       .then((data) => {
@@ -52,16 +56,20 @@ export class UsersAuthService {
   }
 
 
-  getUserProfile() {
+  getUserProfile(): Observable<any> {
     console.log("getUserProfile");
 
-    this.userRegistration = this.db.object('/userRegistration/' + this.authState.uid, { preserveSnapshot: true });
-    this.userRegistration.subscribe((data) => {
+    this.userRegistration = this.db.object('/userRegistration/' + this.afAuth.auth.currentUser.uid, { preserveSnapshot: true });
+    return this.userRegistration.map((data) => {
       this.userProfile = data.val();
-      this.userType = data.val().type;
       console.log(this.userProfile);
+      return this.userProfile;
     })
 
+  }
+
+  get myProfile() {
+    return this.userProfile;
   }
 
   logoutFirebaseUser() {
@@ -70,13 +78,9 @@ export class UsersAuthService {
     this.router.navigate(['/login']);
   }
 
-  get userProfileData(): Observable<any> {
-    return this.userProfile.map((profile) => {
-      return profile;
-    });
-  }
 
-  getCurrentUserId(): Observable<any> {
+
+  getCurrentUserId() {
 
     return this.afAuth.authState.map(authState => {
       return authState.uid;
@@ -88,10 +92,23 @@ export class UsersAuthService {
     return this.authState.uid;
   }
 
-  get userTypeData(): Observable<any> {
-    return this.userProfile.map((profile) => {
-      return profile.type;
-    });
+
+  getAllUsers(): Observable<any> {
+
+    this.allUsers = this.db.list('userRegistration', { preserveSnapshot: true })
+    return this.allUsers.map((uidies) => {
+      this.allUsersKey = [];
+      this.allUsersVal = [];
+      uidies.forEach(data => {
+        this.allUsersKey.push(data.key);
+        this.allUsersVal.push(data.val());
+      });
+      return this.allUsersVal;
+    })
+  }
+
+  get getAllUsersKey(): any {
+    return this.allUsersKey;
   }
 
 }

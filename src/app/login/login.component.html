@@ -4,33 +4,37 @@
 
 
 <!--  LOGIN FORM  -->
-<md-list>
-  <form [formGroup]="loginForm">
+<div fxLayout="column" fxLayoutAlign="center center">
+  <md-card>
+    <md-list>
+      <form [formGroup]="loginForm">
 
-    <md-list-item>
-      <md-input-container>
-        <input mdInput placeholder="Enter Email" type="email" formControlName="email" />
-        <md-error *ngIf="loginForm.status=='INVALID'">
-          Email is <strong>required</strong>
-        </md-error>
-      </md-input-container>
-    </md-list-item>
+        <md-list-item>
+          <md-input-container>
+            <input mdInput placeholder="Enter Email" type="email" formControlName="email" />
+            <md-error *ngIf="loginForm.status=='INVALID'">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+        </md-list-item>
 
-    <br>
+        <br>
 
-    <md-list-item>
-      <md-input-container>
-        <input mdInput placeholder="Enter Password" type="password" formControlName="password" />
-        <md-error *ngIf="loginForm.status=='INVALID'">
-          password is <strong>required</strong>
-        </md-error>
-      </md-input-container>
-    </md-list-item>
+        <md-list-item>
+          <md-input-container>
+            <input mdInput placeholder="Enter Password" type="password" formControlName="password" />
+            <md-error *ngIf="loginForm.status=='INVALID'">
+              password is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+        </md-list-item>
 
-    <button md-raised-button color="primary" [disabled]="loginForm.status == 'INVALID'" (click)="loginUser()">Login</button>
+        <button md-raised-button color="primary" [disabled]="loginForm.status == 'INVALID'" (click)="loginUser()">Login</button>
 
-    <p>Or register as new <a routerLink="/signup" routerLinkActive="active">user</a></p>
+        <p>Or register as new <a routerLink="/signup" routerLinkActive="active">user</a></p>
 
-  </form>
+      </form>
 
-</md-list>
+    </md-list>
+  </md-card>
+</div>

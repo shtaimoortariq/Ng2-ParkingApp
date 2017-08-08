@@ -1,9 +1,9 @@
 <md-toolbar color="primary"> Parking System </md-toolbar>
 <md-toolbar color="primary">
-  <button md-raised-button color="primary" routerLink='viewParking'>viewParking</button>
-  <button md-raised-button color="primary" routerLink='viewBooking'>viewBooking</button>
-  <button md-raised-button color="primary" routerLink='feedBack'>feedBack</button>
-  <button md-raised-button color="primary">logout</button>
+  <button md-raised-button color="primary" routerLink='viewParking' routerLinkActive="changeColor">viewParking</button>
+  <button md-raised-button color="primary" routerLink='viewBooking' routerLinkActive="changeColor">viewBooking</button>
+  <button md-raised-button color="primary" routerLink='feedBack' routerLinkActive="changeColor">feedBack</button>
+  <button md-raised-button color="primary" (click)="logout()">logout</button>
 
 </md-toolbar>
 <router-outlet></router-outlet>

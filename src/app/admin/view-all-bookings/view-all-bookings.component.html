@@ -1,3 +1,26 @@
-<p>
-  view-all-bookings works!
-</p>
+
+
+
+<div class="container">
+  <md-card>
+    <md-card-title>Your Current bookings</md-card-title>
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reserve Hour</th>
+        <th>Slot Number</th>
+        <th>Address</th>
+        <th>Cancel</th>
+      </tr>
+      <tr *ngFor="let booking of currentBooking; let i = index">
+        <th>{{booking.reserveDate}}</th>
+        <th>{{booking.startTime}}</th>
+        <th>{{booking.duration}}</th>
+        <th>{{booking.slotNo}}</th>
+         <th>{{booking.place}}</th> 
+        <th><button md-raised-button color="warn" (click)="cancel(booking, i)">cancel</button></th>
+      </tr>
+    </table>
+  </md-card>
+</div>

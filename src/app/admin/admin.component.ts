@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersAuthService } from "../providers/users-auth.service";
+import { RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usersAuthService: UsersAuthService) { }
 
   ngOnInit() {
   }
+
+  logout() {
+      this.usersAuthService.logoutFirebaseUser();
+  }
+
 
 }

@@ -22,7 +22,7 @@ export class AdminAuthGuardGuard implements CanActivate {
     return this.afAuth.authState.map(user => {
       if (user != null && user.email == 'admin@admin.com') {
         console.log("true");
-        
+        //this.router.navigate(['admin/viewAllBookings']);
         return true;
       }
 
@@ -30,7 +30,7 @@ export class AdminAuthGuardGuard implements CanActivate {
         this.router.navigate(['/login']);
         return false;
       }
-    }).take(1)
+    })
   }
 }
 
