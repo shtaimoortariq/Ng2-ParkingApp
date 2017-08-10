@@ -5,7 +5,7 @@
     <md-card>
       <md-card-title>All users</md-card-title>
       <div *ngFor="let user of allUsers; let i = index">
-        <button md-raised-button (click)="viewChat(i)">{{user.name}}</button>
+        <button *ngIf="user.name != 'Admin'" md-raised-button (click)="viewChat(i)">{{user.name}}</button>
       </div>
 
     </md-card>

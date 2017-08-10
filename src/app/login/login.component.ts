@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['admin@admin.com', Validators.required],
-      password: ['123123', Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     })
 
   }
@@ -46,7 +46,11 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.userAuthService.signInFirebaseUser(this.loginForm.value).then((login) => {
       this.userAuthService.getUserProfile().subscribe((profile) => {
-        if(profile.type == 'admin') {
+        if (profile == null) { 
+          alert("You Are Blocked By Admin");
+          this.userAuthService.logoutFirebaseUser();
+        }
+        else if (profile.type == 'admin') {
           this.router.navigate(['admin/viewAllBookings'])
         }
         else {

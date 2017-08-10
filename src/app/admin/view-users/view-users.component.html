@@ -10,10 +10,12 @@
       </tr>
 
       <tr *ngFor="let user of allUsers; let i = index">
-        <th>{{user.name}}</th>
-        <th>{{user.userName}}</th>
-        <th><button md-raised-button color="warn" (click)="viewUserBookings(i)">show booking</button></th>
-        <th><button md-raised-button color="primary" (click)="deleteUser(i)">delete user</button></th>
+        
+          <th *ngIf="user.name != 'Admin'">{{user.name}}</th>
+          <th *ngIf="user.userName != 'admin@admin.com'">{{user.userName}}</th>
+          <th *ngIf="user.name != 'Admin'"><button md-raised-button color="warn" (click)="viewUserBookings(i)">show booking</button></th>
+          <th *ngIf="user.name != 'Admin'"><button md-raised-button color="primary" (click)="deleteUser(i)">delete user</button></th>
+        
       </tr>
     </table>
   </md-list>
