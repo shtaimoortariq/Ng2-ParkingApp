@@ -1,18 +1,27 @@
-<ul>
-  <li *ngFor="let item of showChat | async">
-    {{ item.name }} 
-    {{item.userMessage}}
-  </li>
-</ul>
+<div fxLayout="column" fxLayoutAlign="center center" >
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <md-card class="boxWidth">
+      <div *ngFor="let item of showChat | async">
+        <div *ngIf="item.name=='admin'">
+          <p class="admin">{{ item.name }} {{item.userMessage}}</p>
+        </div>
+
+        <div *ngIf="item.name!='admin'">
+          {{ item.name }} {{item.userMessage}}
+        </div>
+
+      </div>
 
 
 
-<form [formGroup]="chatForm">
-  <md-input-container>
-    <input mdInput placeholder="New Message" type="text" formControlName="message" />
-  </md-input-container>
+      <form [formGroup]="chatForm">
+        <md-input-container>
+          <input mdInput placeholder="New Message" type="text" formControlName="message" />
+        </md-input-container>
 
-  <button md-raised-button color="primary" (click)="send()" [disabled]="chatForm.status == 'INVALID'">Send</button>
-</form>
-
-
+        <button md-raised-button color="primary" (click)="send()" [disabled]="chatForm.status == 'INVALID'">Send</button>
+      </form>
+    </md-card>
+  </div>
+</div>

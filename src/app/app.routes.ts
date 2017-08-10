@@ -25,7 +25,7 @@ import { ViewAllBookingsComponent } from "./admin/view-all-bookings/view-all-boo
 
 
 const routes: Routes = [
-    { path: '', canActivate: [UserAuthGuardGuard], component: LoginComponent },
+    { path: '', canActivate: [UserAuthGuardGuard, AdminAuthGuardGuard], component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     {

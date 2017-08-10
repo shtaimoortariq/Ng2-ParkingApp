@@ -15,20 +15,21 @@ export class AdminAuthGuardGuard implements CanActivate {
 
 
   canActivate() {
-    // return this.afAuth.authState.map(authState => {
-    //   if (!authState) this.router.navigate(['']);
-    //   else if (authState.email != 'admin@admin.com') {this.router.navigate(['user/viewParking']); return authState != null; };
-    // });
     return this.afAuth.authState.map(user => {
-      if (user != null && user.email == 'admin@admin.com') {
+
+      if (user == null) {
+        this.router.navigate(['login']);
+        return false;
+      }
+      else if (user != null && user.email == 'admin@admin.com') {
         console.log("true");
         //this.router.navigate(['admin/viewAllBookings']);
         return true;
       }
 
       else {
-        this.router.navigate(['/login']);
-        return false;
+        this.router.navigate(['user']);
+        return true;
       }
     })
   }

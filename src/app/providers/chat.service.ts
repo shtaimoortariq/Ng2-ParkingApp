@@ -21,12 +21,12 @@ export class ChatService {
       console.log(this.uid);
     });
 
-    // this.userProfile = this.usersAuthService.getUserProfile().subscribe((data) => {
-    //   this.userProfile = data;
-    //   console.log(this.userProfile);
-    // });
+    this.userProfile = this.usersAuthService.getUserProfile().subscribe((data) => {
+      this.userProfile = data;
+      console.log(this.userProfile);
+    });
 
-    this.userProfile = this.usersAuthService.myProfile;
+    //th0is.userProfile = this.usersAuthService.myProfile;
   }
 
 

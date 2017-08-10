@@ -70,7 +70,9 @@ export class SlotReservationService {
         let currentEndTime = currentStartTime + currentDuration;
         let ndate = date.getDate();
         let month = date.getMonth();
-        let year = date.getYear();
+        let year = date.getFullYear();
+        month++;
+
         let currentDate = ndate + '/' + month + '/' + year;
 
         console.log(currentDate);
@@ -87,7 +89,7 @@ export class SlotReservationService {
             console.log(this.reservedSlots[i].reserveDate)
             if (this.reservedSlots[i].reserveDate == currentDate) {
                 console.log("Date is mateched with selecected date");
-                if (((currentEndTime >= this.reservedSlots[i].startTime) && (currentStartTime < this.reservedSlots[i].endTime))
+                if (((currentEndTime > this.reservedSlots[i].startTime) && (currentStartTime < this.reservedSlots[i].endTime))
                     || ((currentEndTime <= this.reservedSlots[i].endTime) && (currentEndTime > this.reservedSlots[i].startTime))) {
                     console.log("This slot is not avalible " + this.reservedSlots[i].slotNo);
                     this.blockSlots.push(this.reservedSlots[i].slotNo);
@@ -116,7 +118,8 @@ export class SlotReservationService {
         let currentSlot = parseInt(currentSlott);
         let ndate = date.getDate();
         let month = date.getMonth();
-        let year = date.getYear();
+        month++;
+        let year = date.getFullYear();
         let currentDate = ndate + '/' + month + '/' + year;
 
         this.newBooking = this.db.list('booking/' + this.uid + '/' + place, { preserveSnapshot: true })

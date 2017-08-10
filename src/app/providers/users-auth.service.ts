@@ -37,7 +37,7 @@ export class UsersAuthService {
 
   signInFirebaseUser(loginForm) {
     return this.afAuth.auth.signInWithEmailAndPassword(loginForm.email, loginForm.password)
-      .then((data) => {console.log(data);this.getUserProfile()})
+      .then((data) => { console.log(data); this.getUserProfile() })
       .catch((error) => console.log(error));
   }
 
@@ -58,7 +58,7 @@ export class UsersAuthService {
 
   getUserProfile(): Observable<any> {
     console.log("getUserProfile");
-
+    console.log(this.afAuth.auth.currentUser.uid);
     this.userRegistration = this.db.object('/userRegistration/' + this.afAuth.auth.currentUser.uid, { preserveSnapshot: true });
     return this.userRegistration.map((data) => {
       this.userProfile = data.val();
@@ -80,7 +80,7 @@ export class UsersAuthService {
 
 
 
-  getCurrentUserId() {
+  getCurrentUserId(): Observable<any> {
 
     return this.afAuth.authState.map(authState => {
       return authState.uid;

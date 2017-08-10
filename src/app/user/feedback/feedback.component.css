@@ -1,0 +1,12 @@
+.admin {
+    border: transparent;
+    text-align: end;
+    border-radius: 30px;
+}
+
+.boxWidth {
+    overflow: auto;
+    height: 400px;
+    overflow-y: auto;
+}
+
